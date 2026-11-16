@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Image Gallery</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f7f7f2;
+      color: #222222;
+      text-align: center;
+    }
+
+    /* Khung hiển thị ảnh lớn */
+    #image {
+      width: 80%;
+      max-width: 700px;
+      height: 400px;
+      margin: 0 auto 20px;
+      border: 4px solid #1f3a5f;
+      border-radius: 12px;
+      background-color: #ffffff;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #1f3a5f;
+    }
+
+    /* Dải ảnh nhỏ */
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .preview {
+      width: 150px;
+      height: 110px;
+      object-fit: cover;
+      border: 3px solid #1f3a5f;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .preview:hover,
+    .preview:focus {
+      border-color: #f4b942;
+      outline: none;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Image Gallery</h1>
+
+  <div id="image">Hover over an image below to display here.</div>
+
+  <div class="gallery">
+    <img class="preview" src="images/photo1.jpg" alt="Best view of Sai Gon"
+         onmouseover="upDate(this)" onmouseout="unDo()">
+    <img class="preview" src="images/photo2.jpg" alt="Another view of Sai Gon"
+         onmouseover="upDate(this)" onmouseout="unDo()">
+    <img class="preview" src="images/photo3.jpg" alt="Dinh Doc Lap"
+         onmouseover="upDate(this)" onmouseout="unDo()">
+    <img class="preview" src="images/photo4.jpg" alt="Nha Tho Duc Ba"
+         onmouseover="upDate(this)" onmouseout="unDo()">
+    <img class="preview" src="images/photo5.jpg" alt="Sai Gon's Street"
+         onmouseover="upDate(this)" onmouseout="unDo()">
+  </div>
+
+  <script>
+    // Bước 3: hàm upDate - chạy khi chuột đi vào một ảnh nhỏ
+    function upDate(previewPic) {
+      // 3a. Kiểm tra sự kiện có chạy không
+      console.log("upDate was called");
+
+      // 3b. In thông tin của ảnh
+      console.log(previewPic.alt);
+      console.log(previewPic.src);
+
+      // 3c. Đổi chữ của div có id "image" thành alt của ảnh
+      document.getElementById("image").innerHTML = previewPic.alt;
+
+      // 3e. Đổi ảnh nền của div có id "image" thành ảnh đang trỏ vào
+      document.getElementById("image").style.backgroundImage =
+        "url(" + previewPic.src + ")";
+    }
+
+    // Bước 4: hàm unDo - chạy khi chuột rời khỏi ảnh nhỏ
+    function unDo() {
+      console.log("unDo was called");
+
+      // 4a. Trả ảnh nền về giá trị ban đầu
+      document.getElementById("image").style.backgroundImage = "url('')";
+
+      // 4b. Trả chữ về nội dung ban đầu
+      document.getElementById("image").innerHTML =
+        "Hover over an image below to display here.";
+    }
+  </script>
+</body>
+
+</html>
